@@ -1,5 +1,4 @@
 from tkinter import *
-from tkinter.messagebox import showinfo
 from tkinter.ttk import Checkbutton
 import datetime
 
@@ -7,7 +6,7 @@ class MyFrame:
     '''Описание параметров размещения окон'''
     def __init__(self, day, line):
 
-        date = day
+        date = day     # параметры размещения окошек
         column_lab = 1
         column_come = 2
         column_min = 3
@@ -45,7 +44,7 @@ class InputInfo(MyFrame):
         self.gone_hours.grid(column=self.column_hour, row=self.row)
         self.gone_minutes = Entry(window, width=6, )
         self.gone_minutes.grid(column=self.column_gone_min, row=self.row)
-
+        '''Чекбоксы'''
         self.check_state = BooleanVar()
         self.check_state.set(False)
         self.check = Checkbutton(window, text='Чек-лист', variable=self.check_state)
@@ -69,7 +68,6 @@ class App(Tk, InputInfo):
         self.button.grid(column=0, row=0)
 
     def button_result(self):
-
         start = [int(self.come_hours.get()), int(self.come_minutes.get())]
         end = [int(self.gone_hours.get()), int(self.gone_minutes.get())]
         t1 = datetime.datetime(2022, 1, 1, *start)
@@ -81,18 +79,14 @@ class App(Tk, InputInfo):
         print(cash)
         print('hui!')
 
-    def button_clicked(self):
-        showinfo(title='Result', message='TO DO')
-
 if __name__ == "__main__":
     window = App()
     day, line = 0, 1
 
-    for i in range(1):
+    for i in range(3):
         day += 1
         line += 1
         start = InputInfo(day, line)
         start.draw()
-
 
     window.mainloop()
