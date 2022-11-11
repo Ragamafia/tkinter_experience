@@ -94,4 +94,5 @@ if __name__ == "__main__":
         start = InputInfo(day, line)
         start.draw()
 
+
     window.mainloop()
