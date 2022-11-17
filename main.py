@@ -2,11 +2,14 @@ from tkinter import *
 from tkinter.ttk import Checkbutton
 import datetime
 
-class MyFrame:
-    '''Описание параметров размещения окон'''
-    def __init__(self, day, line):
+class App(Tk):
+    def __init__(self, day):   #   характеристики размещения элементов для ввода времени
+        super(App, self).__init__()
 
-        date = day     # параметры размещения окошек
+        self.title("Karban cash calculator")
+        self.geometry('1200x600')
+
+        date = 1
         column_lab = 1
         column_come = 2
         column_min = 3
@@ -15,7 +18,7 @@ class MyFrame:
         column_gone_min = 6
         column_check = 7
         column_one = 8
-        row = line
+        row = day
 
         self.date = date
         self.column_lab = column_lab
@@ -28,65 +31,57 @@ class MyFrame:
         self.column_one = column_one
         self.row = row
 
-class InputInfo(MyFrame):
 
-    def draw(self):
-        '''Отрисовка окон для ввода'''
-        self.label = Label(window, text=f'{self.date}. Пришла:')
-        self.label.grid(column=self.column_lab, row=self.row)
-        self.come_hours = Entry(window, width=6, )
-        self.come_hours.grid(column=self.column_come, row=self.row)
-        self.come_minutes = Entry(window, width=6, )
-        self.come_minutes.grid(column=self.column_min, row=self.row)
-        self.label_gone = Label(window, text='Ушла:')
-        self.label_gone.grid(column=self.column_gone, row=self.row)
-        self.gone_hours = Entry(window, width=6, )
-        self.gone_hours.grid(column=self.column_hour, row=self.row)
-        self.gone_minutes = Entry(window, width=6, )
-        self.gone_minutes.grid(column=self.column_gone_min, row=self.row)
-        '''Чекбоксы'''
-        self.check_state = BooleanVar()
-        self.check_state.set(False)
-        self.check = Checkbutton(window, text='Чек-лист', variable=self.check_state)
-        self.check.grid(column=self.column_check, row=self.row)
-        self.one_state = BooleanVar()
-        self.one_state.set(False)
-        self.one = Checkbutton(window, text='Одна    ', variable=self.one_state)
-        self.one.grid(column=self.column_one, row=self.row)
+    def draw(self):   #   отрисовка элементов для ввода
 
-class App(Tk, InputInfo):
-    '''Главное окно'''
-    def __init__(self):
-        super().__init__()
+        self.label = Label(text='Дата:', font=30).grid(column=0, row=1)
+        self.button = Button(text='TOTAL', font=20, command=self.click_button).grid(column=0, row=0)
 
-        self.title("Karban cash calculator")
-        self.geometry('1200x600')
+        self.label = Label( text=f'{self.date}. Пришла:').grid(column=self.column_lab, row=self.row)
+        self.a = Entry(window, width=6)
+        self.a.grid(column=self.column_come, row=self.row)
+        self.b = Entry(window, width=6)
+        self.b.grid(column=self.column_min, row=self.row)
+        self.label = Label( text='Ушла:').grid(column=self.column_gone, row=self.row)
+        self.c = Entry(window, width=6)
+        self.c.grid(column=self.column_hour, row=self.row)
+        self.d = Entry(window, width=6)
+        self.d.grid(column=self.column_gone_min, row=self.row)
 
-        self.label = Label(self, text='Дата:', font=30)
-        self.label.grid(column=0, row=1)
-        self.button = Button(self, text='TOTAL', font=20, command=self.button_result)
-        self.button.grid(column=0, row=0)
+    def click_button(self):   #   расчет результата нажатия кнопки TOTAL
 
-    def button_result(self):
-        start = [int(self.come_hours.get()), int(self.come_minutes.get())]
-        end = [int(self.gone_hours.get()), int(self.gone_minutes.get())]
-        t1 = datetime.datetime(2022, 1, 1, *start)
-        t0 = datetime.datetime(2022, 1, 1, *end)
-        delta = t0 - t1
-        print(delta)
-        seconds = delta.total_seconds()
-        cash = round(delta.total_seconds() * 0.0277777777777)
-        print(cash)
-        print('hui!')
+        self.start = [int(self.a.get()), int(self.b.get())]
+        self.end = [int(self.c.get()), int(self.d.get())]
+        self.t1 = datetime.datetime(2022, 1, 1, *self.start)
+        self.t0 = datetime.datetime(2022, 1, 1, *self.end)
+        self.delta = self.t0 - self.t1
+        print(self.delta)
+        minutes = self.delta.total_seconds() / 60
+        print(minutes)
+        self.cash = round(minutes * 1.6666666666)
+        print(self.cash)
+
+        # '''Чекбоксы'''
+        # self.check_state = BooleanVar()
+        # self.check_state.set(False)
+        # self.check = Checkbutton(window, text='Чек-лист', variable=self.check_state)
+        # self.check.grid(column=self.column_check, row=self.row)
+        # self.one_state = BooleanVar()
+        # self.one_state.set(False)
+        # self.one = Checkbutton(window, text='Одна    ', variable=self.one_state)
+        # self.one.grid(column=self.column_one, row=self.row)
 
 if __name__ == "__main__":
-    window = App()
-    day, line = 0, 1
+    day = 1
+    window = App(day)
+
 
     for i in range(3):
         day += 1
-        line += 1
-        start = InputInfo(day, line)
-        start.draw()
+
+
+        window.draw()
+
 
     window.mainloop()
+
