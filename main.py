@@ -1,18 +1,20 @@
 from tkinter import *
 import datetime
 
+bank = []
 
-class Block:   # Блок с окнами для заполнения времени
+class Windows:   # Отрисовка окон для заполнения времени
 
     def __init__(self, root, row):
 
         self.label = Label(text=f'Дата: {row}', font=30).grid(column=0, row=row)
         self.label = Label(text='Пришла:').grid(column=1, row=row)
-        self.a = Entry(root, width=6)
+        self.label = Label(text='Ушла:').grid(column=4, row=row)
+
+        self.a = Entry(root, width=6)   # Окна
         self.a.grid(column=2, row=row)
         self.b = Entry(root, width=6)
         self.b.grid(column=3, row=row)
-        self.label = Label(text='Ушла:').grid(column=4, row=row)
         self.c = Entry(root, width=6)
         self.c.grid(column=5, row=row)
         self.d = Entry(root, width=6)
@@ -31,19 +33,27 @@ class Block:   # Блок с окнами для заполнения време
         minutes = delta.total_seconds() / 60
         print(minutes)
         cash = round(minutes * 1.6666666666)
+        bank.append(cash)
         print(cash)
+        print(bank)
+        return cash
 
 
 if __name__ == "__main__":
 
     root = Tk()
     root.title("Karban cash calculator")
-    root.geometry('1200x600')
+    root.geometry('800x600')
+    days = 3
     row = 0
 
-    for i in range(2):
+    for i in range(days):
         row += 1
 
-        Block(root, row)
+        #bank.append()
+        #print(bank)
+
+        Windows(root, row)
+
 
     root.mainloop()
