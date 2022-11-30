@@ -1,59 +1,85 @@
-from tkinter import *
+import tkinter as tk
 import datetime
 
-bank = []
+result = []
 
-class Windows:   # Отрисовка окон для заполнения времени
+class Line:   # Отрисовка окон для заполнения времени
 
-    def __init__(self, root, row):
+    def __init__(self, row, root):
 
-        self.label = Label(text=f'Дата: {row}', font=30).grid(column=0, row=row)
-        self.label = Label(text='Пришла:').grid(column=1, row=row)
-        self.label = Label(text='Ушла:').grid(column=4, row=row)
+        #self.result_in_line = []
 
-        self.a = Entry(root, width=6)   # Окна
-        self.a.grid(column=2, row=row)
-        self.b = Entry(root, width=6)
-        self.b.grid(column=3, row=row)
-        self.c = Entry(root, width=6)
-        self.c.grid(column=5, row=row)
-        self.d = Entry(root, width=6)
-        self.d.grid(column=6, row=row)
+        for i in range(row):
+            row += 1
 
-        self.button = Button(text='TOTAL', font=20, command=self.click_button).grid(column=7, row=0)
+            #self.label = tk.Label(text=f'Дата: {}', font=30).grid(column=0, row=row)
+            self.label = tk.Label(text='Пришла:').grid(column=1, row=row)
+            self.label = tk.Label(text='Ушла:').grid(column=4, row=row)
 
-    def click_button(self):   # Расчет результата нажатия кнопки TOTAL
+            self.a = tk.Entry(root, width=6)   # пришла (часов)
+            self.a.grid(column=2, row=row)
+            self.b = tk.Entry(root, width=6)   # пришла (минут)
+            self.b.grid(column=3, row=row)
+            self.c = tk.Entry(root, width=6)   # ушла (часов)
+            self.c.grid(column=5, row=row)
+            self.d = tk.Entry(root, width=6)   # ушла (минут)
+            self.d.grid(column=6, row=row)
 
-        start = [int(self.a.get()), int(self.b.get())]
-        end = [int(self.c.get()), int(self.d.get())]
-        t1 = datetime.datetime(2022, 1, 1, *start)
-        t0 = datetime.datetime(2022, 1, 1, *end)
-        delta = t0 - t1
-        print(delta)
-        minutes = delta.total_seconds() / 60
-        print(minutes)
-        cash = round(minutes * 1.6666666666)
-        bank.append(cash)
-        print(cash)
-        print(bank)
-        return cash
+            result.append(self.a)#.get())
+            result.append(self.b)#.get())
+            result.append(self.c)#.get())
+            result.append(self.d)#.get())
 
+            # self.result_in_line.append(self.a)
+            # self.result_in_line.append(self.b)
+            # self.result_in_line.append(self.c)
+            # self.result_in_line.append(self.d)
+
+        print(f'Объекты result: {result}')
+        #print(f'Объекты result_in_line: {self.result_in_line}')
+
+    def calculating(self):
+        for i in result:
+            print(i)
+        print(f'Объекты result: {result}')
+        #print(f'Объекты result_in_line: {self.result_in_line}')
+
+        # for i in result:
+        #     print(f'Объект {i}')
+
+            # start = [int(self.a.get()), int(self.b.get())]
+            # end = [int(self.c.get()), int(self.d.get())]
+            # t1 = datetime.datetime(2022, 1, 1, *start)
+            # t0 = datetime.datetime(2022, 1, 1, *end)
+            # delta = t0 - t1
+            # print(delta)
+            # minutes = delta.total_seconds() / 60
+            # print(minutes)
+            # cash = round(minutes * 1.6666666666)
+            # #result.append(cash)
+            # print(cash)
+            # print(i)
+            # print(result)
 
 if __name__ == "__main__":
 
-    root = Tk()
-    root.title("Karban cash calculator")
+    root = tk.Tk()   # окно приложения
+    root.title('KARBAN')
     root.geometry('800x600')
-    days = 3
-    row = 0
 
-    for i in range(days):
-        row += 1
+    row = 2   # количество отработанных дней
+    run = Line(row, root)
 
-        #bank.append()
-        #print(bank)
-
-        Windows(root, row)
-
+    tk.Button(root, text='TOTAL', font=20, command=run.calculating).grid(column=7, row=0)
 
     root.mainloop()
+
+
+
+
+
+
+
+
+
+
