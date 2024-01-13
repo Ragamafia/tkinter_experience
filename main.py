@@ -1,4 +1,5 @@
 import new_window
+import datetime
 
 from tkinter import Tk
 from tkinter import Entry, Frame, Button
@@ -24,6 +25,7 @@ class Day(Frame):   # класс создания окон ввода
 
 class Window(Tk):   # класс создания линий ввода
     days = []
+    field = []
 
     def __init__(self):
         super().__init__()
@@ -31,16 +33,29 @@ class Window(Tk):   # класс создания линий ввода
 
     def create_days(self):
 
-        for row in range(1):   # количество дней
+        for row in range(2):   # количество дней
             line = Day(row)
             line.grid(row=row)
             self.days.append(line)
             new_window.Post(row)
 
-        Button(text='TOTAL', font=20, command=self.calculate).grid(column=8, row=21)
+        Button(text='Принять', font=20, command=self.calculate).grid(column=8, row=21)
 
     def calculate(self):
-        [print(i.get()) for i in self.days]
+
+        for i in self.days:
+            self.field.append(i.get())
+        Button(text='РАСЧЕТ', font=20, command=self.get_time).grid(column=8, row=22)
+
+    def get_time(self):
+
+        for i in self.field:
+            start = ':'.join(i[:2])
+            end = ':'.join(i[2:])
+            time1 = datetime.datetime.strptime(start, '%H:%M')
+            time2 = datetime.datetime.strptime(end, '%H:%M')
+            time_delta = time2 - time1
+            print(time_delta)
 
 
 if __name__ == '__main__':
