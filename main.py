@@ -1,61 +1,52 @@
+import new_window
+
 from tkinter import Tk
-from tkinter import Entry, Frame, Button, Toplevel, END
+from tkinter import Entry, Frame, Button
 
 
-class Day(Frame):
+class Day(Frame):   # класс создания окон ввода
     fields = []
 
     def __init__(self, row, *args, **kwargs):
         self.row = row
         super().__init__(*args, **kwargs)
-        self.setup_ui()
+        self.create_input()
 
-    def setup_ui(self):
-        # создаем наши инпутики
+    def create_input(self):   # создаем инпуты...
         self.fields = [Entry(width=4) for i in range(4)]
 
-        # и раставляем на нашей сеткe
-        for f, i in zip(self.fields, [0,1,2,3]):
-            f.grid(column=i, row=self.row)
+        for f, i in zip(self.fields, [2, 3, 5, 6]):   # ...и размещаем их по сетке
+            f.grid(row=self.row, column=i)
 
-    def get(self):
-        '''
-        при этом вызове мы отдадим то что у нас написанно
-        '''
+    def get(self):   # при этом вызове отдаём введенные данные
         return [f.get() for f in self.fields]
 
-# class Setting(Toplevel):
-#     def __init__(self):
-#         super().__init__()
-#         self.open_window()
-#
-#     def open_window(self):
-#         Button(text='TOTAL', font=20).grid(column=8, row=21)
 
-class Window(Tk):
+class Window(Tk):   # класс создания линий ввода
     days = []
 
     def __init__(self):
         super().__init__()
-        self.setup_ui()
+        self.create_days()
 
-    def setup_ui(self):
+    def create_days(self):
 
-        for row in range(5):
+        for row in range(1):   # количество дней
             line = Day(row)
             line.grid(row=row)
             self.days.append(line)
+            new_window.Post(row)
 
         Button(text='TOTAL', font=20, command=self.calculate).grid(column=8, row=21)
 
     def calculate(self):
-        [print(l.get()) for l in self.days]
+        [print(i.get()) for i in self.days]
 
 
 if __name__ == '__main__':
+
     root = Window()
     root.title('KARBAN CALC')
-    root.geometry('390x380')
+    root.geometry('800x600')
 
     root.mainloop()
-
