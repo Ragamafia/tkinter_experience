@@ -1,4 +1,4 @@
-import welcome
+import settings
 
 import datetime   # Для работы со временем,
 import operator   # и объектами datetime
@@ -29,7 +29,7 @@ class Day(Frame):   # класс создания окон ввода (Entry)
         return [f.get() for f in self.inputs]
 
 
-class Window(Tk):   # Класс создания линий ввода
+class Main_window(Tk):   # Класс создания линий ввода
 
     days = []
     time = []
@@ -37,7 +37,7 @@ class Window(Tk):   # Класс создания линий ввода
 
     def __init__(self,  *args, **kwargs):
 
-        welcome.Setting()   # Вызов окна настроек поверх главного окна
+        settings.Setting()   # Вызов окна настроек поверх главного окна
 
         super().__init__(*args, **kwargs)
 
@@ -54,13 +54,13 @@ class Window(Tk):   # Класс создания линий ввода
 
     def create_days(self):
 
-        for row in range(1):  # Количество дней
+        for row in range(2):  # Количество дней
             line = Day(row)
             line.grid(row=row)
             self.days.append(line)
 
         Label(text='Начало:').grid(row=0, column=0, sticky='e')
-        Label(text='Конец').grid(row=0, column=4, sticky='e')
+        Label(text='Конец:').grid(row=0, column=4, sticky='e')
 
         Button(text='Принять данные', font=20, command=self.accept_and_result).grid(column=8, row=21)
 
@@ -71,7 +71,7 @@ class Window(Tk):   # Класс создания линий ввода
 
     def calculate(self):  # ...и считаем результат
 
-        self.tariff = welcome.Setting.tariff
+        self.tariff = settings.Setting.tariff
 
         for i in self.time:
             start = ':'.join(i[:2])

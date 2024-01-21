@@ -1,9 +1,9 @@
-from vidget import Window
+from data import Main_window
 
 
-def main_window():
-    Window()
+def main():
+    Main_window()
 
 
 if __name__ == '__main__':
-    main_window()
+    main()
