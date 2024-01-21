@@ -11,7 +11,11 @@ class Setting(Tk):   # Приветственное окно, настройки
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
 
+        self.title('Setting')
+        self.geometry('430x500')
+
         self.open_window()
+        self.mainloop()
 
     def accept_and_close_window(self):   # Метод вызова двух функций для кнопки "Выбрать"
         self.setup()
@@ -46,9 +50,3 @@ class Setting(Tk):   # Приветственное окно, настройки
             Setting.tariff = 150
             print('Выбрана Анастасия')
 
-
-root = Setting()
-root.geometry('420x500')
-root.title('Settings')
-
-root.mainloop()

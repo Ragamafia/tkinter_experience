@@ -33,13 +33,19 @@ class Window(Tk):   # Класс создания линий ввода
 
     days = []
     time = []
-    result_time = []
+    delta_time = []
 
-    def __init__(self, tariff, *args, **kwargs):
-        self.tariff = tariff
+    def __init__(self,  *args, **kwargs):
+
+        welcome.Setting()   # Вызов окна настроек поверх главного окна
+
         super().__init__(*args, **kwargs)
 
+        self.title('KARBAN CALC')
+        self.geometry('800x600')
+
         self.create_days()
+        self.mainloop()
 
     def accept_and_result(self):   # Метод вызова двух функций нажатием одной кнопки "Принять"
 
@@ -47,7 +53,6 @@ class Window(Tk):   # Класс создания линий ввода
         self.calculate()
 
     def create_days(self):
-
 
         for row in range(1):  # Количество дней
             line = Day(row)
@@ -66,23 +71,17 @@ class Window(Tk):   # Класс создания линий ввода
 
     def calculate(self):  # ...и считаем результат
 
+        self.tariff = welcome.Setting.tariff
+
         for i in self.time:
             start = ':'.join(i[:2])
             end = ':'.join(i[2:])
             time_start = datetime.datetime.strptime(start, '%H:%M')  # приведение к формату str("ЧЧ:ММ")
             time_end = datetime.datetime.strptime(end, '%H:%M')
 
-            self.result_time.append(time_end - time_start)
+            self.delta_time.append(time_end - time_start)
 
-        result = reduce(operator.add, self.result_time)  # суммируем время из списка с объектами datetime
+        result = reduce(operator.add, self.delta_time)  # суммируем время из списка с объектами datetime
         print(f'Отработано времени: {result}')   # пока что печать в консоль
         cash = (result.seconds / 3600) * self.tariff
         print(f'К выплате: {cash}')
-
-tariff = welcome.Setting.tariff
-
-root = Window(tariff)
-root.title('KARBAN CALC')
-root.geometry('800x600')
-
-root.mainloop()

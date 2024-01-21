@@ -1,9 +1,9 @@
-from vidget import Window, tariff
+from vidget import Window
 
 
-def main():
-    Window(tariff)
+def main_window():
+    Window()
 
 
 if __name__ == '__main__':
-    main()
+    main_window()
