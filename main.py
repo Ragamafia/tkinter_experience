@@ -1,4 +1,4 @@
-from data import Main_window
+from app import Main_window
 
 
 def main():

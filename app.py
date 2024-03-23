@@ -2,6 +2,7 @@ import settings
 
 import datetime   # Для работы со временем,
 import operator   # и объектами datetime
+from datetime import datetime
 
 from tkinter import Tk
 from tkinter import Entry, Frame, Button, Label
@@ -24,6 +25,7 @@ class Day(Frame):   # класс создания окон ввода (Entry)
 
         for f, i in zip(self.inputs, [2, 3, 5, 6]):  # ...и размещаем их по сетке
             f.grid(row=self.row, column=i)
+
 
     def get_fields(self):  # При этом вызове отдаём введенные данные
         return [f.get() for f in self.inputs]
@@ -54,7 +56,7 @@ class Main_window(Tk):   # Класс создания линий ввода
 
     def create_days(self):
 
-        for row in range(2):  # Количество дней
+        for row in range(1):  # Количество дней
             line = Day(row)
             line.grid(row=row)
             self.days.append(line)
