@@ -1,5 +1,5 @@
 import settings
-from utils import HoursEntry, ValidateEntry
+from utils import HoursEntry, MinutesEntry, ValidateEntry
 
 import datetime   # Для работы со временем,
 import operator   # и объектами datetime
@@ -22,7 +22,11 @@ class Day(Frame):   # класс создания окон ввода (Entry)
 
     def create_input(self):  # создаем инпуты...
         self.inputs = [
-            HoursEntry(self.root, width=4, validate='key', validatecommand=ValidateEntry.validate) for i in range(4)]
+            (HoursEntry(self.root, width=4, validate='key', validatecommand=ValidateEntry.validate)),
+            (MinutesEntry(self.root, width=4, validate='key', validatecommand=ValidateEntry.validate)),
+            (HoursEntry(self.root, width=4, validate='key', validatecommand=ValidateEntry.validate)),
+            (MinutesEntry(self.root, width=4, validate='key', validatecommand=ValidateEntry.validate))
+            ]
 
         for f, i in zip(self.inputs, [2, 3, 5, 6]):  # ...и размещаем их по сетке
             f.grid(row=self.row, column=i)

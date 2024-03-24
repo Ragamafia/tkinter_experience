@@ -16,11 +16,15 @@ class ValidateEntry(Entry):
 
         if string.isnumeric():
             return min(self.arrange) <= int(string) <= max(self.arrange)
-        else:
-            messagebox.showwarning("Неверный ввод", "Число должно быть в диапазоне от 1 до 60")
 
+        else:
+            messagebox.showwarning('Неверный ввод', 'Ожидаемый формат ввода "ЧЧ:ММ"!')
         return False
 
 
 class HoursEntry(ValidateEntry):
-    arrange = [00, 24]
+    arrange = [00, 23]
+
+
+class MinutesEntry(ValidateEntry):
+    arrange = [00, 59]
