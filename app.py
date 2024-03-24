@@ -22,10 +22,7 @@ class Day(Frame):   # класс создания окон ввода (Entry)
 
     def create_input(self):  # создаем инпуты...
         self.inputs = [
-            (HoursEntry(self.root, width=4, validate='key', validatecommand=ValidateEntry.validate)),
-            (MinutesEntry(self.root, width=4, validate='key', validatecommand=ValidateEntry.validate)),
-            (HoursEntry(self.root, width=4, validate='key', validatecommand=ValidateEntry.validate)),
-            (MinutesEntry(self.root, width=4, validate='key', validatecommand=ValidateEntry.validate))
+            (HoursEntry(self.root)), (MinutesEntry(self.root)), (HoursEntry(self.root)), (MinutesEntry(self.root))
             ]
 
         for f, i in zip(self.inputs, [2, 3, 5, 6]):  # ...и размещаем их по сетке
@@ -35,24 +32,23 @@ class Day(Frame):   # класс создания окон ввода (Entry)
         return [f.get() for f in self.inputs]
 
 
-class MainWindow(Tk):   # Класс создания линий ввода
+class MainWindow(Tk):   # Создание главного окна
 
     days = []
     time = []
     delta_time = []
 
     def __init__(self,  *args, **kwargs):
-        # super().__init__(*args, **kwargs)
+        super().__init__(*args, **kwargs)
 
         self.tariff = settings.Setting.tariff
 
-        self.root = Tk()
-        self.root.title('KARBAN CALC')
-        self.root.geometry('800x600')
+        self.title('KARBAN CALC')
+        self.geometry('800x600')
 
         self.create_days()
 
-        self.root.mainloop()
+        self.mainloop()
 
     def accept_and_result(self):   # Метод вызова двух функций нажатием одной кнопки "Принять"
         self.get_time()
@@ -60,7 +56,7 @@ class MainWindow(Tk):   # Класс создания линий ввода
 
     def create_days(self):
         for row in range(1):  # Количество дней
-            line = Day(self.root, row)
+            line = Day(self, row)
             line.grid(row=row)
             self.days.append(line)
 

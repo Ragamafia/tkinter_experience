@@ -7,7 +7,7 @@ class ValidateEntry(Entry):
 
     def __init__(self, root, *args, **kwargs):
         kwargs['validatecommand'] = root.register(self.validate), '%P'
-        super().__init__(root, *args, **kwargs)
+        super().__init__(root, *args, width=4, validate='key', **kwargs)
 
     def validate(self, value) -> bool:
         string = value.strip()
