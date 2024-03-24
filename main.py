@@ -6,7 +6,6 @@ def main():
     Setting()
     MainWindow()
 
+
 if __name__ == '__main__':
     main()
-
-

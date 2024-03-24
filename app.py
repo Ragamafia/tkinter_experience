@@ -1,5 +1,5 @@
 import settings
-from utils import HoursEntry, MinutesEntry, ValidateEntry
+from utils import HoursEntry, MinutesEntry
 
 import datetime   # Для работы со временем,
 import operator   # и объектами datetime
@@ -10,7 +10,6 @@ from functools import reduce
 
 
 class Day(Frame):   # класс создания окон ввода (Entry)
-
     inputs = []
 
     def __init__(self, root, row, *args, **kwargs):
@@ -33,15 +32,17 @@ class Day(Frame):   # класс создания окон ввода (Entry)
 
 
 class MainWindow(Tk):   # Создание главного окна
-
     days = []
     time = []
     delta_time = []
+    result_days = ''
+    cash = ''
 
     def __init__(self,  *args, **kwargs):
         super().__init__(*args, **kwargs)
 
         self.tariff = settings.Setting.tariff
+        self.work = settings.Setting.work_days
 
         self.title('KARBAN CALC')
         self.geometry('800x600')
@@ -53,9 +54,10 @@ class MainWindow(Tk):   # Создание главного окна
     def accept_and_result(self):   # Метод вызова двух функций нажатием одной кнопки "Принять"
         self.get_time()
         self.calculate()
+        self.show_result()
 
     def create_days(self):
-        for row in range(1):  # Количество дней
+        for row in range(self.work):  # Количество дней
             line = Day(self, row)
             line.grid(row=row)
             self.days.append(line)
@@ -79,6 +81,12 @@ class MainWindow(Tk):   # Создание главного окна
             self.delta_time.append(time_end - time_start)
 
         result = reduce(operator.add, self.delta_time)  # суммируем время из списка с объектами datetime
-        print(f'Отработано времени: {result}')   # пока что печать в консоль
+        MainWindow.result_days = result
         cash = (result.seconds / 3600) * self.tariff
-        print(f'К выплате: {cash}')
+        MainWindow.cash = round(cash)
+
+    def show_result(self):
+        Label(text='Отработано часов: ').grid()
+        Label(text=MainWindow.result_days).grid()
+        Label(text='К выплате: ').grid()
+        Label(text=MainWindow.cash).grid()

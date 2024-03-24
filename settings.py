@@ -1,12 +1,12 @@
 import tkinter
 
 from tkinter import Tk
-from tkinter import Button, Label, Radiobutton
+from tkinter import Button, Label, Radiobutton, Entry
 
 
 class Setting(Tk):   # Приветственное окно, настройки
-
     tariff = ''
+    work_days = ''
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
@@ -21,7 +21,7 @@ class Setting(Tk):   # Приветственное окно, настройки
 
         self.mainloop()
 
-    def accept_and_close_window(self):   # Метод вызова двух функций для кнопки "Выбрать"
+    def accept_and_close_window(self):   # Метод вызова функций для кнопки "Выбрать"
         self.setup()
         self.destroy()
 
@@ -34,9 +34,16 @@ class Setting(Tk):   # Приветственное окно, настройки
         Radiobutton(text='Анна', variable=self.status, value=1).grid(sticky='w')
         Radiobutton(text='Анастасия', variable=self.status, value=2).grid(sticky='w')
 
+        Label(text='Введите количество отработанных дней').grid(sticky='w')
+        self.work_days = Entry()
+        self.work_days.grid()
+
         Button(text="Выбрать", command=self.accept_and_close_window).grid()
 
-    def setup(self):   # Установка тарифа
+    def setup(self):   # Установка тарифа и количества линий
+        result = self.work_days.get()
+        Setting.work_days = int(result)
+
         if self.status.get() == 0:
             Setting.tariff = 100
             print('Выбрана Тахмина')
@@ -48,3 +55,5 @@ class Setting(Tk):   # Приветственное окно, настройки
         elif self.status.get() == 2:
             Setting.tariff = 150
             print('Выбрана Анастасия')
+
+
