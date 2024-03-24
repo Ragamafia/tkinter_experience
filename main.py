@@ -1,9 +1,12 @@
-from app import Main_window
+from settings import Setting
+from app import MainWindow
 
 
 def main():
-    Main_window()
-
+    Setting()
+    MainWindow()
 
 if __name__ == '__main__':
     main()
+
+
