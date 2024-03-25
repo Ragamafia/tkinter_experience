@@ -13,10 +13,8 @@ class ValidateEntry(Entry):
         string = value.strip()
         if not string:
             return True
-
         if string.isnumeric():
             return min(self.arrange) <= int(string) <= max(self.arrange)
-
         else:
             messagebox.showwarning('Неверный ввод', 'Ожидаемый формат ввода "ЧЧ:ММ"!')
         return False
