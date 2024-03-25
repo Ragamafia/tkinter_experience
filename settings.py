@@ -1,19 +1,14 @@
-import tkinter
-import config as cfg
+from tkinter import Button, Label, Radiobutton, Entry, IntVar, StringVar, Tk
 
-from tkinter import Tk
-from tkinter import Button, Label, Radiobutton, Entry
+import config as cfg
 
 
 class Setting(Tk):   # Приветственное окно, настройки
-    tariff = ''
-    work_days = ''
-
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
 
-        self.status = tkinter.IntVar()  # Для выбора сотрудника
-        self.status.set(0)
+        self.status = IntVar()  # Для выбора сотрудника
+        self.status.set(cfg.current_user)
         self.title('Setting')
         self.geometry('430x500')
         self.open_window()
@@ -31,19 +26,22 @@ class Setting(Tk):   # Приветственное окно, настройки
         Radiobutton(text='Анна', variable=self.status, value=1).grid(sticky='w')
         Radiobutton(text='Анастасия', variable=self.status, value=2).grid(sticky='w')
         Label(text='Введите количество отработанных дней').grid(sticky='w')
-        self.work_days = Entry()
+
+        days = StringVar()
+        days.set(cfg.current_user)
+
+        self.work_days = Entry(textvariable=days)
         self.work_days.grid()
         Button(text="Выбрать", command=self.accept_and_close_window).grid()
 
     def setup(self):   # Установка тарифа и количества линий
-        result = self.work_days.get()
-        Setting.work_days = int(result)
+        cfg.days_cnt = int(self.work_days.get())
 
         if self.status.get() == 0:
-            Setting.tariff = 100
+            cfg.tariff = 100
 
         elif self.status.get() == 1:
-            Setting.tariff = 120
+            cfg.tariff = 120
 
         elif self.status.get() == 2:
-            Setting.tariff = 150
+            cfg.tariff = 150

@@ -1,13 +1,10 @@
-import settings
-
-from utils import HoursEntry, MinutesEntry
-
 import datetime   # Для работы со временем,
 import operator   # и объектами datetime
-
-from tkinter import Tk
-from tkinter import Frame, Button, Label
 from functools import reduce
+from tkinter import Frame, Button, Label, Tk
+
+import config as cfg
+from utils import HoursEntry, MinutesEntry
 
 
 class Day(Frame):   # класс создания окон ввода (Entry)
@@ -21,7 +18,10 @@ class Day(Frame):   # класс создания окон ввода (Entry)
 
     def create_input(self):  # создаем инпуты...
         self.inputs = [
-            (HoursEntry(self.root)), (MinutesEntry(self.root)), (HoursEntry(self.root)), (MinutesEntry(self.root))
+            (HoursEntry(self.root)),
+            (MinutesEntry(self.root)),
+            (HoursEntry(self.root)),
+            (MinutesEntry(self.root))
             ]
 
         for f, i in zip(self.inputs, [2, 3, 5, 6]):  # ...и размещаем их по сетке
@@ -40,9 +40,6 @@ class MainWindow(Tk):   # Создание главного окна
 
     def __init__(self,  *args, **kwargs):
         super().__init__(*args, **kwargs)
-        self.tariff = settings.Setting.tariff
-        self.work_day = settings.Setting.work_days
-
         self.title('KARBAN CALC')
         self.geometry('800x600')
         self.create_days()
@@ -54,7 +51,7 @@ class MainWindow(Tk):   # Создание главного окна
         self.show_result()
 
     def create_days(self):
-        for row in range(self.work_day):  # Количество дней
+        for row in range(cfg.days_cnt):  # Количество дней
             line = Day(self, row)
             line.grid(row=row)
             self.days.append(line)
@@ -77,11 +74,9 @@ class MainWindow(Tk):   # Создание главного окна
 
         result = reduce(operator.add, self.delta_time)  # суммируем время из списка с объектами datetime
         self.result_days = result
-        cash = (result.seconds / 3600) * self.tariff
+        cash = (result.seconds / 3600) * cfg.tariff
         self.cash = round(cash)
 
     def show_result(self):
         Label(text=f'Отработано часов: {self.result_days}').grid()
         Label(text=f'К выплате: {self.cash}р.').grid()
-
-
