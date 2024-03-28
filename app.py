@@ -72,10 +72,8 @@ class MainWindow(Tk):   # Создание главного окна
             time_end = datetime.datetime.strptime(end, '%H:%M')
             self.delta_time.append(time_end - time_start)
 
-        result = reduce(operator.add, self.delta_time)  # суммируем время из списка с объектами datetime
-        self.result_days = result
-        cash = (result.seconds / 3600) * cfg.tariff
-        self.cash = round(cash)
+        self.result_days = reduce(operator.add, self.delta_time)  # суммируем время из списка с объектами datetime
+        self.cash = round((self.result_days.seconds / 3600) * cfg.tariff)
 
     def show_result(self):
         Label(text=f'Отработано часов: {self.result_days}').grid()
