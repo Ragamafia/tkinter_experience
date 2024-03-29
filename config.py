@@ -1,15 +1,15 @@
+import json
+
+
 tariff = 50
 days_cnt = 2
 current_user = 1
+default_user_id = 1
+
+def get_users():
+    with open('users.json') as f:
+        users = json.load(f)
+        return users
 
 
-users = {
-    1: {'name': 'Анна', 'id': 1, 'tariff': 100},
-    2: {'name': 'Тахмина', 'id': 2, 'tariff': 150},
-    3: {'name': 'Анастасия', 'id': 3, 'tariff': 200}
-          }
-
-
-
-
-
+users = get_users()

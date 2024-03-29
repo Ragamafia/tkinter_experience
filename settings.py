@@ -1,4 +1,4 @@
-from tkinter import Button, Label, Radiobutton, Entry, IntVar, Tk
+from tkinter import Button, Label, Radiobutton, Entry, StringVar, Tk
 
 import config as cfg
 
@@ -7,7 +7,8 @@ class Setting(Tk):   # Приветственное окно, настройки
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
 
-        self.status = IntVar()  # Для выбора сотрудника
+        self.status = StringVar()  # Для выбора сотрудника
+        self.status.set(cfg.default_user_id)
         self.title('Setting')
         self.geometry('430x500')
         self.open_window()
