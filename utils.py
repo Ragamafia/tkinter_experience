@@ -31,7 +31,7 @@ class MinutesEntry(ValidateEntry):
     arrange = [00, 59]
 
 
-def add_users_json(new_users):
+def dump_users(new_users):
     with open('users.json', 'w') as f:
         json.dump(new_users, f)
 
@@ -39,7 +39,4 @@ def add_users_json(new_users):
 def get_users():
     with open('users.json') as f:
         users = json.load(f)
-        for i in users:
-            cfg.list_users.append(users.get(i)['name'])
-
         return users

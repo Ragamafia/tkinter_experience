@@ -7,7 +7,8 @@ import config as cfg
 from utils import HoursEntry, MinutesEntry
 
 
-class Day(Frame):   # Input window creation widget (Entry)
+class Day(Frame):
+    # Input window creation widget (Entry)
     inputs = []
 
     def __init__(self, root, row, *args, **kwargs):
@@ -27,7 +28,7 @@ class Day(Frame):   # Input window creation widget (Entry)
         for f, i in zip(self.inputs, [2, 3, 5, 6]):  # ...and place them on the grid
             f.grid(row=self.row, column=i)
 
-    def get_fields(self):  # return entered data
+    def get_fields(self):
         return [f.get() for f in self.inputs]
 
 
@@ -41,17 +42,18 @@ class MainWindow(Tk):
     def __init__(self,  *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.title('KARBAN CALC')
-        self.geometry('800x600')
+        self.geometry('640x480+600+300')
         self.create_days()
         self.mainloop()
 
-    def accept_and_result(self):   # Method for calling functions when the "Accept" button is clicked
+    def accept_and_result(self):
+        # Method for calling functions when the "Accept" button is clicked
         self.get_time()
         self.calculate()
         self.show_result()
 
     def create_days(self):
-        for row in range(cfg.days_cnt):  # count of days
+        for row in range(cfg.days_cnt):
             line = Day(self, row)
             line.grid(row=row)
             self.days.append(line)

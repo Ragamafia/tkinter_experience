@@ -1,5 +1,8 @@
-Calculator for determining hourly wage. 
+Calculator for determining hourly wages. 
 Select an employee and the program will perform calculations based on the specified rates. 
+Storing a list of employees in a separate json file. You can add or remove workers.
+You can't make a mistake when typing! Input validation for the user is enabled.
+
 The application is written using the Tkinter library 
 (a Python module package for creating user interface applications).
 
@@ -9,15 +12,15 @@ main.py - Entry point
 
 settings.py - Welcome/settings
 
+editor.py - Staff editor
+
 app.py - Main operations with input data and calculation
 
 config.py - Configuration, employees
 
 utils.py - Tools for validating user input
 
-save.py - Saving the last input data (TO DO)
-
-
+_____________________________________________________________
 
 Калькулятор для определения почасовой заработной платы.
 Выберите сотрудника и программа выполнит рассчеты в соответствии с заданными тарифами.  
@@ -32,6 +35,8 @@ save.py - Saving the last input data (TO DO)
 main.py - Точка входа
 
 settings.py - Приветствие/настройки. Открытие редактирования.
+
+editor.py - Редактор сотрудников
 
 app.py - Основные операции с вводом данных и подсчетом
 
