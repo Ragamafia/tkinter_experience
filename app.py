@@ -42,7 +42,7 @@ class MainWindow(Tk):
     def __init__(self,  *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.title('KARBAN CALC')
-        self.geometry('640x480+600+300')
+        self.geometry('640x480')
         self.create_days()
         self.mainloop()
 

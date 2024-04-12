@@ -12,7 +12,7 @@ class Setting(Tk):
         self.status = StringVar()  # Для выбора сотрудника
         self.status.set(cfg.default_user_id)
         self.title('Setting')
-        self.geometry('430x500+600+300')
+        self.geometry('540x380')
 
         self.open_window()
         self.mainloop()

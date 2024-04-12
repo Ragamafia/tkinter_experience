@@ -2,10 +2,9 @@ import json
 from tkinter import messagebox
 from tkinter import Entry
 
-import config as cfg
 
-
-class ValidateEntry(Entry):   # Валидация ввода по заданному формату. Вы не сможете допустить ошибку.
+class ValidateEntry(Entry):
+    # Валидация ввода по заданному формату. Вы не сможете допустить ошибку.
     arrange = []
 
     def __init__(self, root, *args, **kwargs):
