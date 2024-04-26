@@ -1,10 +1,24 @@
-Calculator for determining hourly wages. 
-Select an employee and the program will perform calculations based on the specified rates. 
-Storing a list of employees in a separate json file. You can add or remove workers.
-You can't make a mistake when typing! Input validation for the user is enabled.
+Project Description
 
-The application is written using the Tkinter library 
-(a Python module package for creating user interface applications).
+This application developed in Python using the tkinter library is designed to calculate the salary based on hours worked down to the minute. Users can select an employee from the list, specify the number of days worked, and the application will automatically calculate the total amount in rubles. Also, there is an option to edit the list of employees.
+
+User Guide
+
+1. Running the Application: To run the application, execute the main.py script.
+
+2. Selecting an Employee: Users choose the desired employee from the dropdown list.
+
+3. Inputting Worked Days: Users input the number of days worked for the selected employee.
+
+4. Salary Calculation: After inputting the data, the program calculates the salary considering the selected employee's rate.
+
+5. Editing the List of Employees: You can add, delete, or modify employee data using the list editing function.
+
+Important
+
+- Input Validation: The application features input validation to prevent errors when entering work time.
+- Requirements: To run the application properly, you need Python and the tkinter library installed.
+- Storing a list of employees in a separate json file.
 
 Project structure:
 
@@ -22,13 +36,27 @@ utils.py - Tools for validating user input
 
 _____________________________________________________________
 
-Калькулятор для определения почасовой заработной платы.
-Выберите сотрудника и программа выполнит расчеты в соответствии с заданными тарифами.  
-Хранение списка сотрудников в отдельном json файле. Вы можете добавлять или удалять работников.
-Вы не можете ошибиться при вводе! Подключена валидация ввода для пользователя.
+Описание проекта:
 
-Приложение написано с привлечением библиотеки Tkinter.
-(Пакет модулей Python для создания приложений с графическим интерфейсом пользователя.)
+Это приложение, разработанное на Python с использованием библиотеки tkinter, предназначено для расчета размера зарплаты по отработанным часам с точностью до минуты. Пользователь может выбрать сотрудника из списка, указать количество отработанных дней и приложение автоматически рассчитает итоговую сумму в рублях. Также предусмотрена возможность редактирования списка сотрудников.
+
+Инструкция пользования:
+
+1. Запуск приложения: Для запуска приложения необходимо выполнить скрипт main.py.
+
+2. Выбор сотрудника: Из выпадающего списка пользователь выбирает нужного сотрудника.
+
+3. Ввод отработанных дней: Пользователь вводит количество отработанных дней для выбранного сотрудника.
+
+4. Расчет зарплаты: После ввода данных программа расчитывает размер зарплаты с учетом тарифа выбранного сотрудника.
+
+5. Редактирование списка сотрудников: Для добавления, удаления или изменения данных о сотрудниках можно воспользоваться функцией редактирования списка.
+
+Важно:
+
+- Валидация ввода: В приложении реализована валидация ввода данных, что позволяет избежать ошибок при вводе времени работы.
+- Требования: Для корректной работы приложения необходим Python и библиотека tkinter.
+- Хранение списка сотрудников в отдельном json файле.
 
 Структура проекта:
 
